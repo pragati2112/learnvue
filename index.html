@@ -1,0 +1,92 @@
+<html>
+<head>
+
+
+</head>
+<style>
+.disabled{
+    background-color: brown;
+}
+
+</style>
+<body>
+
+<div id="root">
+    <!-- <input type="text" id ="input" v-model='message'><br><br> -->
+   <!-- <input type="text" id ="input"  name="name" v-model='names[0].name' placeholder="your name">
+  
+    
+    <input type="submit" onclick="submit()" value="Submit"> -->
+    <ul>
+        <li v-for="name in names">{{name}}</li>
+   </ul>
+   
+   <input type="text" id="input" v-model="newname">
+   <button id="button" v-on:click="addName">add name</button>
+   <button :class="{'disabled':disable}" @click="enable">click me</button><br><br>
+
+   <h1>All tasks</h1>
+   <ul>
+        <li v-for="task in tasks">{{task.name}}</li>
+   </ul>
+   <h1>Incomplete tasks</h1>
+   <ul>
+        <li v-for="task in incompletetask">{{task.name}}</li>
+   </ul>
+   {{incompletetask}}
+</div>
+
+<script src= https://unpkg.com/vue@2.6.10/dist/vue.js></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+
+  var app=new Vue({
+
+      el:'#root',
+      data:
+      {
+          message:'hello world',
+          newname:"",
+          names:['pragati','abhishek','mishra'],
+          disable:false,
+          tasks:[
+              { name:"food",completed:false },
+              { name:"bathe",completed:false },
+              { name:"notes",completed:true },
+
+          ]
+          
+      },
+      methods:{
+          addName()
+          {
+            this.names.push(this.newname);
+            this.newname="";
+          },
+          enable()
+          {
+              this.disable=true;
+          }
+      },
+
+      computed:{
+          incompletetask()
+          {
+              return this.tasks.filter(task =>!task.completed);
+          }
+      }
+
+
+  })
+
+    // document.querySelector("#button").addEventListener('click',()=>{
+    //     var name= document.querySelector("#input");
+    //     app.names.push(name.value);
+    //     name.value="";
+    // })
+
+</script>
+
+</body>
+</html>
